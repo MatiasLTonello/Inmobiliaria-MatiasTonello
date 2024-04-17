@@ -1,0 +1,66 @@
+package ar.edu.unlam.pb2;
+
+import java.util.Objects;
+
+abstract public class Propiedad {
+	private Propietario dueño;
+	private Inquilino inquilino;
+	private Direccion direccion;
+	private Double valor;
+	
+	public Propiedad(Propietario dueño, Direccion direccion, Double valor) {
+		this.dueño = dueño;
+		this.setDireccion(direccion);
+		this.setValor(valor);
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(direccion);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Propiedad other = (Propiedad) obj;
+		return Objects.equals(direccion, other.direccion);
+	}
+
+	public Propietario getDueño() {
+		return dueño;
+	}
+
+	public void setDueño(Propietario dueño) {
+		this.dueño = dueño;
+	}
+
+	public Inquilino getInquilino() {
+		return inquilino;
+	}
+
+	public void setInquilino(Inquilino inquilino) {
+		this.inquilino = inquilino;
+	}
+
+	public Direccion getDireccion() {
+		return direccion;
+	}
+
+	public void setDireccion(Direccion direccion) {
+		this.direccion = direccion;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+	
+}
