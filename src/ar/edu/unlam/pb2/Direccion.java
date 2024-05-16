@@ -31,6 +31,11 @@ public class Direccion {
 		return Objects.equals(calle, other.calle) && Objects.equals(localidad, other.localidad)
 				&& Objects.equals(numero, other.numero);
 	}
+	
+    @Override
+    public String toString() {
+        return "Direccion [localidad=" + localidad + ", calle=" + calle + ", numero=" + numero + "]";
+    }
 
 	public String getLocalidad() {
 		return localidad;

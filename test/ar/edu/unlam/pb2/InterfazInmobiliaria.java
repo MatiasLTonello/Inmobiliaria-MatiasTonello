@@ -279,11 +279,6 @@ private static void agregarNuevaPropiedad() {
         CODIGO_DE_PROPIEDAD_SIGUIENTE++;
     } else {
         System.out.println("Error al agregar la propiedad");
-    }    if (actual.darDeAltaPropiedad(nuevaPropiedad)) {
-        System.out.println("Propiedad agregada correctamente");
-        CODIGO_DE_PROPIEDAD_SIGUIENTE++;
-    } else {
-        System.out.println("Error al agregar la propiedad");
     }
 }
 	private static void modificarPropiedadExistente() {

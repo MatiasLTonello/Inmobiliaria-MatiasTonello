@@ -8,22 +8,9 @@ public class Propietario extends Cliente {
 		super(apellido, dni);
 		this.setPropiedades(new ArrayList<>());
 	}
-	private String apellido;
-	private String dni;
+
 	private ArrayList<Propiedad> propiedades;
 	
-	public String getApellido() {
-		return apellido;
-	}
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	public String getDni() {
-		return dni;
-	}
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
 	public ArrayList<Propiedad> getPropiedades() {
 		return propiedades;
 	}

@@ -7,17 +7,19 @@ public abstract class Cliente {
 	private String apellido;
 	private String dni;
 
-	
 	public String getApellido() {
 		return apellido;
 	}
+
 	public void setApellido(String apellido) {
 		this.apellido = apellido;
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(dni);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -29,16 +31,23 @@ public abstract class Cliente {
 		Cliente other = (Cliente) obj;
 		return Objects.equals(dni, other.dni);
 	}
+
 	public String getDni() {
 		return dni;
 	}
+
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
+
 	public Cliente(String apellido, String dni) {
 		this.apellido = apellido;
 		this.dni = dni;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Cliente [apellido=" + apellido + ", dni=" + dni + "]";
+	}
+
 }

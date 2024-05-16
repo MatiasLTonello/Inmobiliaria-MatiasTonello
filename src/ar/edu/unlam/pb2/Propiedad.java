@@ -93,4 +93,17 @@ abstract public class Propiedad {
 		this.tipoDeOperacion = tipoDeOperacion;
 	}
 	
+	@Override
+	public String toString() {
+	    return "Propiedad {" +
+	            "Dueño: " + (dueño != null ? dueño.toString() : "No asignado") + ", " +
+	            "Inquilino: " + (inquilino != null ? inquilino.toString() : "No asignado") + ", " +
+	            "Dirección: " + (direccion != null ? direccion.toString() : "No asignada") + ", " +
+	            "Valor: " + (valor != null ? "$" + valor : "No asignado") + ", " +
+	            "Código de Propiedad: " + (codigoDePropiedad != null ? codigoDePropiedad : "No asignado") + ", " +
+	            "Está Alquilada: " + (estaAlquilada != null ? (estaAlquilada ? "Sí" : "No") : "No asignado") + ", " +
+	            "Tipo de Operación: " + (tipoDeOperacion != null ? tipoDeOperacion.toString() : "No asignado") +
+	            " }";
+	}
+	
 }

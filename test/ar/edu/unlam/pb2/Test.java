@@ -154,4 +154,22 @@ public class Test {
 		assertNull(inmo.buscarPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR));
 	}
 	
+	@org.junit.Test
+	public void queSePuedaAgregarUnClienteEnLaInmobiliaria() {
+		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propi = new Propietario("Tonello", "40143300");
+		
+		assertTrue(inmo.addCliente(propi));
+	}
+	
+	@org.junit.Test
+	public void queSePuedaBuscarUnClienteEnLaInmobiliariaPorDNI() {
+		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propi = new Propietario("Tonello", "40143300");
+		
+		inmo.addCliente(propi);
+		
+		assertNotNull(inmo.buscarClientePorDNI("40143300"));
+	}
+	
 }
