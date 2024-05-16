@@ -63,6 +63,9 @@ public class Inmobiliaria {
                 propiedadesEnRango.add(propiedad);
             }
         }
+        if (propiedadesEnRango.isEmpty()) {
+            return null;
+        }
         return propiedadesEnRango;
     }
 

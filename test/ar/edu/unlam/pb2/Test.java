@@ -138,7 +138,7 @@ public class Test {
 	}
 	
 	@org.junit.Test
-	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnArrayNuloSiNoAplicanResultados() {
+	public void queLaBusquedaPorRangoDePrecioDeCasasMeArrojeUnaListaNuloSiNoAplicanResultados() {
 		final Double VALOR_MINIMO_A_BUSCAR = 1000.00;
 		final Double VALOR_MAXIMO_A_BUSCAR = 5000.00;
 		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
