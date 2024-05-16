@@ -1,10 +1,16 @@
 package ar.edu.unlam.pb2;
 
-public class Propietario {
+import java.util.ArrayList;
 
+public class Propietario extends Cliente {
+
+	public Propietario(String apellido, String dni) {
+		super(apellido, dni);
+		this.setPropiedades(new ArrayList<>());
+	}
 	private String apellido;
 	private String dni;
-	private Casa casas[];
+	private ArrayList<Propiedad> propiedades;
 	
 	public String getApellido() {
 		return apellido;
@@ -18,12 +24,13 @@ public class Propietario {
 	public void setDni(String dni) {
 		this.dni = dni;
 	}
-	
-	public Propietario(String apellido, String dni) {
-		this.apellido = apellido;
-		this.dni = dni;
-		this.casas = new Casa[200];
+	public ArrayList<Propiedad> getPropiedades() {
+		return propiedades;
 	}
+	public void setPropiedades(ArrayList<Propiedad> propiedades) {
+		this.propiedades = propiedades;
+	}
+	
 	
 	
 }

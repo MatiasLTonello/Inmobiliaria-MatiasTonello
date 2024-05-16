@@ -7,11 +7,17 @@ abstract public class Propiedad {
 	private Inquilino inquilino;
 	private Direccion direccion;
 	private Double valor;
+	private Integer codigoDePropiedad;
+	private Boolean estaAlquilada;
+	private TipoDeOperacion tipoDeOperacion;
 	
-	public Propiedad(Propietario dueño, Direccion direccion, Double valor) {
+	public Propiedad(Propietario dueño, Direccion direccion, Double valor, Integer codigoDePropiedad) {
 		this.dueño = dueño;
 		this.setDireccion(direccion);
 		this.setValor(valor);
+		this.setCodigoDePropiedad(codigoDePropiedad);
+		this.setEstaAlquilada(false);
+		this.tipoDeOperacion = TipoDeOperacion.VENTA;
 	}
 	
 	@Override
@@ -61,6 +67,30 @@ abstract public class Propiedad {
 
 	public void setValor(Double valor) {
 		this.valor = valor;
+	}
+
+	public Integer getCodigoDePropiedad() {
+		return codigoDePropiedad;
+	}
+
+	public void setCodigoDePropiedad(Integer codigoDePropiedad) {
+		this.codigoDePropiedad = codigoDePropiedad;
+	}
+
+	public Boolean getEstaAlquilada() {
+		return estaAlquilada;
+	}
+
+	public void setEstaAlquilada(Boolean estaAlquilada) {
+		this.estaAlquilada = estaAlquilada;
+	}
+
+	public TipoDeOperacion getTipoDeOperacion() {
+		return tipoDeOperacion;
+	}
+
+	public void setTipoDeOperacion(TipoDeOperacion tipoDeOperacion) {
+		this.tipoDeOperacion = tipoDeOperacion;
 	}
 	
 }

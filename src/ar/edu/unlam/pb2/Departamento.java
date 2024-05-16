@@ -7,8 +7,8 @@ public class Departamento extends Propiedad {
 	private Integer piso;
 	private String departamento;
 	
-	public Departamento(Propietario dueño, Direccion direccion, Double valor, Integer piso, String departamento) {
-		super(dueño,direccion, valor);
+	public Departamento(Propietario dueño, Direccion direccion, Double valor,Integer codigoDePropiedad, Integer piso, String departamento) {
+		super(dueño,direccion, valor, codigoDePropiedad);
 		this.setPiso(piso);
 		this.setDepartamento(departamento);
 	}

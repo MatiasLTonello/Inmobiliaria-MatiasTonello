@@ -1,29 +1,19 @@
 package ar.edu.unlam.pb2;
 
-public class Inquilino {
+public class Inquilino extends Cliente {
 
-	private String apellido;
-	private String dni;
-	
-	public String getApellido() {
-		return apellido;
-	}
-	
-	public void setApellido(String apellido) {
-		this.apellido = apellido;
-	}
-	
-	public String getDni() {
-		return dni;
-	}
+	private Propiedad propiedadAlquilada;
 	
 	public Inquilino(String apellido, String dni) {
-		super();
-		this.apellido = apellido;
-		this.dni = dni;
+		super(apellido, dni);
+	}
+	
+	public Propiedad getPropiedadAlquilada() {
+		return propiedadAlquilada;
+	}
+	public void setPropiedadAlquilada(Propiedad propiedadAlquilada) {
+		this.propiedadAlquilada = propiedadAlquilada;
 	}
 
-	public void setDni(String dni) {
-		this.dni = dni;
-	}
+
 }
