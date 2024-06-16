@@ -168,8 +168,9 @@ public class Test {
 		Propietario propi = new Propietario("Tonello", "40143300");
 		
 		inmo.addCliente(propi);
-		
+		inmo.addCliente(propi);
 		assertNotNull(inmo.buscarClientePorDNI("40143300"));
+		
 	}
 	
 }
