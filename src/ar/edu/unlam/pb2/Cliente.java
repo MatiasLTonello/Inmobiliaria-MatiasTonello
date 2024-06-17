@@ -2,7 +2,7 @@ package ar.edu.unlam.pb2;
 
 import java.util.Objects;
 
-public abstract class Cliente {
+public class Cliente {
 
 	private String apellido;
 	private String dni;

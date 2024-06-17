@@ -17,6 +17,7 @@ public class Propietario extends Cliente {
 	public void setPropiedades(ArrayList<Propiedad> propiedades) {
 		this.propiedades = propiedades;
 	}
+
 	
 	
 	

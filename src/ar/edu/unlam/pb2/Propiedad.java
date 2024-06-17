@@ -2,7 +2,7 @@ package ar.edu.unlam.pb2;
 
 import java.util.Objects;
 
-abstract public class Propiedad {
+abstract public class Propiedad implements Comparable<Propiedad> {
 	private Propietario dueño;
 	private Inquilino inquilino;
 	private Direccion direccion;
@@ -105,5 +105,21 @@ abstract public class Propiedad {
 	            "Tipo de Operación: " + (tipoDeOperacion != null ? tipoDeOperacion.toString() : "No asignado") +
 	            " }";
 	}
+	
+	@Override
+	public int compareTo(Propiedad o) {
+		int retorno = 0;
+		if(this.getValor() > o.getValor()) {
+			retorno = -1;
+		} else if(this.getValor() < o.getValor()) {
+			retorno = 1;
+		}
+		
+		return retorno;
+	}
+	
+	
+	
+	
 	
 }

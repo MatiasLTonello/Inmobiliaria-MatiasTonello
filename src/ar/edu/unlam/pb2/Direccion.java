@@ -4,19 +4,19 @@ import java.util.Objects;
 
 public class Direccion {
 
-	private String localidad;
+	private String ciudad;
 	private String calle;
 	private String numero;
 	
-	public Direccion(String localidad, String calle, String numero) {
-		this.localidad = localidad;
+	public Direccion(String ciudad, String calle, String numero) {
+		this.ciudad = ciudad;
 		this.calle = calle;
 		this.numero = numero;
 	}
 	
 	@Override
 	public int hashCode() {
-		return Objects.hash(calle, localidad, numero);
+		return Objects.hash(calle, ciudad, numero);
 	}
 
 	@Override
@@ -28,21 +28,21 @@ public class Direccion {
 		if (getClass() != obj.getClass())
 			return false;
 		Direccion other = (Direccion) obj;
-		return Objects.equals(calle, other.calle) && Objects.equals(localidad, other.localidad)
+		return Objects.equals(calle, other.calle) && Objects.equals(ciudad, other.ciudad)
 				&& Objects.equals(numero, other.numero);
 	}
 	
     @Override
     public String toString() {
-        return "Direccion [localidad=" + localidad + ", calle=" + calle + ", numero=" + numero + "]";
+        return "Direccion [Ciudad=" + ciudad + ", calle=" + calle + ", numero=" + numero + "]";
     }
 
-	public String getLocalidad() {
-		return localidad;
+	public String getCiudad() {
+		return ciudad;
 	}
 
-	public void setLocalidad(String localidad) {
-		this.localidad = localidad;
+	public void setCiudad(String ciudad) {
+		this.ciudad = ciudad;
 	}
 
 	public String getCalle() {
