@@ -87,29 +87,24 @@ public class Inmobiliaria {
 	public void cambiarDueñoDePropiedad(Propietario nuevoPropietario, Propiedad propiedad) {
 		propiedad.setDueño(nuevoPropietario);
 	}
-
-	public Double obtenerValorPromedioDeCasas() {
-		double valorTotal = 0.0;
-		int cantidadDeCasas = 0;
+	
+	public Double obtenerValorPromedioDePropiedades(TipoDePropiedad tipo) {
+		Double valorTotal = 0.0;
+		int cantidadDePropiedades = 0;
 		for (Propiedad propiedad : propiedades) {
-			if (propiedad instanceof Casa) {
-				valorTotal += propiedad.getValor();
-				cantidadDeCasas++;
-			}
+			if(tipo == TipoDePropiedad.CASA) {
+				if (propiedad instanceof Casa) {
+					valorTotal += propiedad.getValor();
+					cantidadDePropiedades++;
+				}
+			} else {
+				if (propiedad instanceof Departamento) {
+					valorTotal += propiedad.getValor();
+					cantidadDePropiedades++;
+				}
+			}	
 		}
-		return cantidadDeCasas > 0 ? valorTotal / cantidadDeCasas : 0.0;
-	}
-
-	public Double obtenerValorPromedioDeDepartamentos() {
-		double valorTotal = 0.0;
-		int cantidadDeDepartamentos = 0;
-		for (Propiedad propiedad : propiedades) {
-			if (propiedad instanceof Departamento) {
-				valorTotal += propiedad.getValor();
-				cantidadDeDepartamentos++;
-			}
-		}
-		return cantidadDeDepartamentos > 0 ? valorTotal / cantidadDeDepartamentos : 0.0;
+		return cantidadDePropiedades > 0 ? valorTotal / cantidadDePropiedades : 0.0;
 	}
 
 	public Propiedad buscarPropiedadPorCodigo(Integer codigo) {
