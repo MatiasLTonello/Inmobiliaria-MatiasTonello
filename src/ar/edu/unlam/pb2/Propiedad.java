@@ -3,7 +3,7 @@ package ar.edu.unlam.pb2;
 import java.util.Objects;
 
 abstract public class Propiedad implements Comparable<Propiedad> {
-	private Propietario dueño;
+	private Propietario propietario;
 	private Inquilino inquilino;
 	private Direccion direccion;
 	private Double valor;
@@ -11,8 +11,8 @@ abstract public class Propiedad implements Comparable<Propiedad> {
 	private Boolean estaAlquilada;
 	private TipoDeOperacion tipoDeOperacion;
 	
-	public Propiedad(Propietario dueño, Direccion direccion, Double valor, Integer codigoDePropiedad, TipoDeOperacion tipo) {
-		this.dueño = dueño;
+	public Propiedad(Propietario propietario, Direccion direccion, Double valor, Integer codigoDePropiedad, TipoDeOperacion tipo) {
+		this.propietario = propietario;
 		this.setDireccion(direccion);
 		this.setValor(valor);
 		this.setCodigoDePropiedad(codigoDePropiedad);
@@ -37,12 +37,12 @@ abstract public class Propiedad implements Comparable<Propiedad> {
 		return Objects.equals(direccion, other.direccion);
 	}
 
-	public Propietario getDueño() {
-		return dueño;
+	public Propietario getPropietario() {
+		return propietario;
 	}
 
-	public void setDueño(Propietario dueño) {
-		this.dueño = dueño;
+	public void setPropietario(Propietario propietario) {
+		this.propietario = propietario;
 	}
 
 	public Inquilino getInquilino() {
@@ -96,7 +96,7 @@ abstract public class Propiedad implements Comparable<Propiedad> {
 	@Override
 	public String toString() {
 	    return "Propiedad {" +
-	            "Dueño: " + (dueño != null ? dueño.toString() : "No asignado") + ", " +
+	            "Dueño: " + (propietario != null ? propietario.toString() : "No asignado") + ", " +
 	            "Inquilino: " + (inquilino != null ? inquilino.toString() : "No asignado") + ", " +
 	            "Dirección: " + (direccion != null ? direccion.toString() : "No asignada") + ", " +
 	            "Valor: " + (valor != null ? "$" + valor : "No asignado") + ", " +

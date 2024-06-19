@@ -1,7 +1,6 @@
 package ar.edu.unlam.pb2;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.TreeSet;
@@ -123,10 +122,6 @@ public class Inmobiliaria {
         return casasEnRango;
     }
 
-	public void cambiarDueñoDePropiedad(Propietario nuevoPropietario, Propiedad propiedad) {
-		propiedad.setDueño(nuevoPropietario);
-	}
-	
 	public Double obtenerValorPromedioDePropiedades(TipoDePropiedad tipo) {
 		Double valorTotal = 0.0;
 		int cantidadDePropiedades = 0;

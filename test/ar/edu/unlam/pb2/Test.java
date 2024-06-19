@@ -3,7 +3,6 @@ package ar.edu.unlam.pb2;
 import static org.junit.Assert.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.TreeSet;
 
 public class Test {
@@ -21,14 +20,14 @@ public class Test {
 	@org.junit.Test
 	public void queSePuedanDarDeAltaDosCasasEnLaInmobiliaria() throws UmbralMinimoNoAlcanzadoException {
 		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
+		Propietario propietario = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Varela", "1324" );
-		Propiedad casaAgregar = new Casa( propi, direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar2 = new Casa( propi, direccion2, 12000.00, 2, TipoDeOperacion.VENTA );
+		Propiedad primerCasaAAgregar = new Casa( propietario, direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad segundaCasaAAgregar = new Casa( propietario, direccion2, 12000.00, 2, TipoDeOperacion.VENTA );
 		
-		assertTrue(inmobiliaria.darDeAltaPropiedad(casaAgregar));
-		assertTrue(inmobiliaria.darDeAltaPropiedad(casaAgregar2));
+		assertTrue(inmobiliaria.darDeAltaPropiedad(primerCasaAAgregar));
+		assertTrue(inmobiliaria.darDeAltaPropiedad(segundaCasaAAgregar));
 	}
 	
 	@org.junit.Test
@@ -43,15 +42,15 @@ public class Test {
 	
 	@org.junit.Test
 	public void queSePuedanDarDeAltaDosDepartamentoEnLaInmobiliaria () throws UmbralMinimoNoAlcanzadoException {
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
-		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
-		Direccion direccion2 = new Direccion("Bs As", "Varela", "1232" );
-		Departamento nuevoDepa = new Departamento(propi, direccion1, 12000.00, 1, 2, "Dep1",TipoDeOperacion.VENTA );
-		Departamento nuevoDepa2 = new Departamento(propi, direccion2, 12000.00, 2, 3, "Dep2", TipoDeOperacion.VENTA );
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propiedad = new Propietario("Tonello", "40143300");
+		Direccion primerDireccion = new Direccion("Bs As", "Salguero", "1232" );
+		Direccion segundaDireccion = new Direccion("Bs As", "Varela", "1232" );
+		Propiedad primerDepartamento = new Departamento(propiedad, primerDireccion, 12000.00, 1, 2, "Dep1",TipoDeOperacion.VENTA );
+		Propiedad segundoDepartamento = new Departamento(propiedad, segundaDireccion, 12000.00, 2, 3, "Dep2", TipoDeOperacion.VENTA );
 
-		assertTrue(inmo.darDeAltaPropiedad(nuevoDepa));
-		assertTrue(inmo.darDeAltaPropiedad(nuevoDepa2));
+		assertTrue(inmobiliaria.darDeAltaPropiedad(primerDepartamento));
+		assertTrue(inmobiliaria.darDeAltaPropiedad(segundoDepartamento));
 	}
 
 	@org.junit.Test
@@ -59,23 +58,23 @@ public class Test {
 		final Double VALOR_PROMEDIO_ESPERADO = 100000.00;
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.CASA;
 
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propietario = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Salguero", "1432" );
 		Direccion direccion3 = new Direccion("Bs As", "Varela", "1432" );
 		Direccion direccion4 = new Direccion("Bs As", "Mataderos", "9832" );
-		Propiedad casaAgregar = new Casa( propi,direccion1, 25000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar2 = new Casa( propi, direccion2, 175000.00, 2, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar3 = new Casa( propi, direccion3, 100000.00, 3, TipoDeOperacion.VENTA );
-		Propiedad departamento = new Departamento(propi, direccion4, 50000.00,4, 1, "Dep90", TipoDeOperacion.VENTA);
+		Propiedad casaAgregar = new Casa( propietario,direccion1, 25000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad casaAgregar2 = new Casa( propietario, direccion2, 175000.00, 2, TipoDeOperacion.VENTA );
+		Propiedad casaAgregar3 = new Casa( propietario, direccion3, 100000.00, 3, TipoDeOperacion.VENTA );
+		Propiedad departamento = new Departamento(propietario, direccion4, 50000.00,4, 1, "Dep90", TipoDeOperacion.VENTA);
 		
-		inmo.darDeAltaPropiedad(casaAgregar);
-		inmo.darDeAltaPropiedad(casaAgregar2);
-		inmo.darDeAltaPropiedad(casaAgregar3);
-		inmo.darDeAltaPropiedad(departamento);
+		inmobiliaria.darDeAltaPropiedad(casaAgregar);
+		inmobiliaria.darDeAltaPropiedad(casaAgregar2);
+		inmobiliaria.darDeAltaPropiedad(casaAgregar3);
+		inmobiliaria.darDeAltaPropiedad(departamento);
 
-		assertEquals(VALOR_PROMEDIO_ESPERADO, inmo.obtenerValorPromedioDePropiedades(tipoDePropiedadABuscar), 0.01);
+		assertEquals(VALOR_PROMEDIO_ESPERADO, inmobiliaria.obtenerValorPromedioDePropiedades(tipoDePropiedadABuscar), 0.01);
 	}
 	
 	@org.junit.Test
@@ -83,80 +82,80 @@ public class Test {
 		final Double VALOR_PROMEDIO_ESPERADO = 40000.00;
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.DEPARTAMENTO;
 
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propietario = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Salguero", "1432" );
 		Direccion direccion3 = new Direccion("Bs As", "Varela", "1432" );
 		
-		Departamento depa1 = new Departamento(propi, direccion1, 40000.00,1, 2, "Dep1", TipoDeOperacion.VENTA);
-		Departamento depa2 = new Departamento(propi, direccion2, 40000.00, 2, 2, "Dep1", TipoDeOperacion.VENTA);
-		Departamento depa3 = new Departamento(propi, direccion3, 40000.00,3, 2, "Dep1", TipoDeOperacion.VENTA);
+		Departamento depa1 = new Departamento(propietario, direccion1, 40000.00,1, 2, "Dep1", TipoDeOperacion.VENTA);
+		Departamento depa2 = new Departamento(propietario, direccion2, 40000.00, 2, 2, "Dep1", TipoDeOperacion.VENTA);
+		Departamento depa3 = new Departamento(propietario, direccion3, 40000.00,3, 2, "Dep1", TipoDeOperacion.VENTA);
 		
-		inmo.darDeAltaPropiedad(depa1);
-		inmo.darDeAltaPropiedad(depa2);
-		inmo.darDeAltaPropiedad(depa3);
+		inmobiliaria.darDeAltaPropiedad(depa1);
+		inmobiliaria.darDeAltaPropiedad(depa2);
+		inmobiliaria.darDeAltaPropiedad(depa3);
 		
-		assertEquals(VALOR_PROMEDIO_ESPERADO, inmo.obtenerValorPromedioDePropiedades(tipoDePropiedadABuscar), 0.01);
+		assertEquals(VALOR_PROMEDIO_ESPERADO, inmobiliaria.obtenerValorPromedioDePropiedades(tipoDePropiedadABuscar), 0.01);
 	}
 	
 	@org.junit.Test
 	public void queSePuedaAgregarUnClienteALaInmobiliaria() {
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 		Cliente nuevoCliente = new Cliente("Tonello", "40143300");
 				
-		assertTrue(inmo.addCliente(nuevoCliente));
+		assertTrue(inmobiliaria.addCliente(nuevoCliente));
 	}
 	
 	@org.junit.Test
 	public void queNoSePuedanAgregarDosClientesConUnMismoDni() {
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 		Cliente nuevoCliente = new Cliente("Tonello", "40143300");
 		Cliente nuevoClienteConMismoDni = new Cliente("Monteagudo", "40143300");
 		
-		inmo.addCliente(nuevoCliente);
-		assertFalse(inmo.addCliente(nuevoClienteConMismoDni));
-		assertEquals(1, inmo.getClientes().size());
-		assertTrue(inmo.getClientes().contains(nuevoClienteConMismoDni));
+		inmobiliaria.addCliente(nuevoCliente);
+		assertFalse(inmobiliaria.addCliente(nuevoClienteConMismoDni));
+		assertEquals(1, inmobiliaria.getClientes().size());
+		assertTrue(inmobiliaria.getClientes().contains(nuevoClienteConMismoDni));
 	}
 	
 	@org.junit.Test
 	    public void queSePuedaRealizarLaVentaDeUnaPropiedad() throws ClienteNoEncontradoException, PropiedadNoEncontradaException, PropiedadNoDisponibleException, UmbralMinimoNoAlcanzadoException {
-			Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+			Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 			Cliente propietarioActual = new Propietario("Tonello", "40143300");
 			Cliente nuevoPropietario = new Propietario("Monteagudo", "333333");
 			TipoDeOperacion venta = TipoDeOperacion.VENTA;
 
 			Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
-			Propiedad casaAgregar = new Casa((Propietario)propietarioActual,direccion1, 40000.00, 1, TipoDeOperacion.VENTA);
-	        inmo.darDeAltaPropiedad(casaAgregar);
-	        inmo.addCliente(nuevoPropietario);
+			Propiedad propiedadPorSerVendida = new Casa((Propietario)propietarioActual,direccion1, 40000.00, 1, TipoDeOperacion.VENTA);
+			inmobiliaria.darDeAltaPropiedad(propiedadPorSerVendida);
+			inmobiliaria.addCliente(nuevoPropietario);
 	        
-	        assertTrue(inmo.realizarOperacion(nuevoPropietario.getDni(), casaAgregar.getCodigoDePropiedad(), venta));
-	        assertEquals(nuevoPropietario.getDni(), casaAgregar.getDueño().getDni());  
+	        assertTrue(inmobiliaria.realizarOperacion(nuevoPropietario.getDni(), propiedadPorSerVendida.getCodigoDePropiedad(), venta));
+	        assertEquals(nuevoPropietario.getDni(), propiedadPorSerVendida.getPropietario().getDni());  
 	    }
 	
 	@org.junit.Test
     public void queSePuedaRealizarElAlquilerDeUnaPropiedad() throws ClienteNoEncontradoException, PropiedadNoEncontradaException, PropiedadNoDisponibleException, UmbralMinimoNoAlcanzadoException {
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 		Cliente propietarioActual = new Propietario("Tonello", "40143300");
 		Cliente nuevoInquilino = new Inquilino("Monteagudo", "333333");
 		TipoDeOperacion alquiler = TipoDeOperacion.ALQUILER;
 
 
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
-		Propiedad casaAgregar = new Casa((Propietario)propietarioActual,direccion1, 40000.00, 1, TipoDeOperacion.ALQUILER);
-        inmo.darDeAltaPropiedad(casaAgregar);
-        inmo.addCliente(nuevoInquilino);
+		Propiedad propiedadPorSerAlquilada = new Casa((Propietario)propietarioActual,direccion1, 40000.00, 1, TipoDeOperacion.ALQUILER);
+		inmobiliaria.darDeAltaPropiedad(propiedadPorSerAlquilada);
+		inmobiliaria.addCliente(nuevoInquilino);
         
-        assertTrue(inmo.realizarOperacion(nuevoInquilino.getDni(), casaAgregar.getCodigoDePropiedad(), alquiler));
-        assertEquals(casaAgregar.getInquilino(), nuevoInquilino);
+        assertTrue(inmobiliaria.realizarOperacion(nuevoInquilino.getDni(), propiedadPorSerAlquilada.getCodigoDePropiedad(), alquiler));
+        assertEquals(propiedadPorSerAlquilada.getInquilino(), nuevoInquilino);
         
     }
 	
 	@org.junit.Test
     public void queSePuedaRealizarLaPermutaDeDosPropiedades() throws ClienteNoEncontradoException, PropiedadNoEncontradaException, UmbralMinimoNoAlcanzadoException, PropiedadNoDisponibleException {
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 		Cliente propietarioCasaX = new Propietario("Tonello", "40143300");
 		Cliente propietarioCasaY = new Propietario("Monteagudo", "333333");
 
@@ -166,12 +165,12 @@ public class Test {
 		Propiedad propiedadCasaX = new Casa((Propietario)propietarioCasaX,direccionCasaX, 40000.00, 1, TipoDeOperacion.PERMUTA);
 		Propiedad propiedadCasaY = new Casa((Propietario)propietarioCasaY,direccionCasaY, 40000.00, 2, TipoDeOperacion.PERMUTA);
 
-        inmo.darDeAltaPropiedad(propiedadCasaX);
-        inmo.darDeAltaPropiedad(propiedadCasaY);
+		inmobiliaria.darDeAltaPropiedad(propiedadCasaX);
+        inmobiliaria.darDeAltaPropiedad(propiedadCasaY);
         
-        assertTrue(inmo.realizarPermuta(1, 2));
-        assertEquals(propietarioCasaY, propiedadCasaX.getDueño());
-        assertEquals(propietarioCasaX, propiedadCasaY.getDueño());
+        assertTrue(inmobiliaria.realizarPermuta(1, 2));
+        assertEquals(propietarioCasaY, propiedadCasaX.getPropietario());
+        assertEquals(propietarioCasaX, propiedadCasaY.getPropietario());
     }
 	
 	
@@ -181,30 +180,30 @@ public class Test {
 		final Double VALOR_MINIMO_A_BUSCAR = 1000.00;
 		final Double VALOR_MAXIMO_A_BUSCAR = 70000.00;
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.CASA;
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propietario = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Salguero", "1432" );
 		Direccion direccion3 = new Direccion("Bs As", "Varela", "1111" );
 		Direccion direccion4 = new Direccion("Mar del Plata", "Av. Peron", "1432" );
 
 
-		Propiedad casaAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar2 = new Casa( propi, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar3 = new Casa( propi, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
-		Propiedad depa1 = new Departamento(propi, direccion4, 16000.00,1, 2, "Dep1", TipoDeOperacion.VENTA);
+		Propiedad primerCasaAAgregar = new Casa( propietario,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad segundaCasaAAgregar = new Casa( propietario, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
+		Propiedad tercerCasaAAgregar = new Casa( propietario, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
+		Propiedad primerDepartamentoAAgregar = new Departamento(propietario, direccion4, 16000.00,1, 2, "Dep1", TipoDeOperacion.VENTA);
 		
-		inmo.darDeAltaPropiedad(casaAgregar);
-		inmo.darDeAltaPropiedad(casaAgregar2);
-		inmo.darDeAltaPropiedad(casaAgregar3);
-		inmo.darDeAltaPropiedad(depa1);
+		inmobiliaria.darDeAltaPropiedad(primerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(segundaCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(tercerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(primerDepartamentoAAgregar);
 
 		
-		TreeSet<Propiedad> casasEncontradasEnElRango = inmo.buscarPropiedadesPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR, tipoDePropiedadABuscar);
+		TreeSet<Propiedad> casasEncontradasEnElRango = inmobiliaria.buscarPropiedadesPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR, tipoDePropiedadABuscar);
         
-		assertEquals(casaAgregar2, casasEncontradasEnElRango.first());
-		assertEquals(casaAgregar, casasEncontradasEnElRango.last());
-		assertFalse(casasEncontradasEnElRango.contains(depa1));
+		assertEquals(segundaCasaAAgregar, casasEncontradasEnElRango.first());
+		assertEquals(primerCasaAAgregar, casasEncontradasEnElRango.last());
+		assertFalse(casasEncontradasEnElRango.contains(primerDepartamentoAAgregar));
     }
 	
 	@org.junit.Test
@@ -212,27 +211,27 @@ public class Test {
 		final String ciudadABuscar = "Bs As";
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.CASA;
 
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 		Propietario propi = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Balguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Aalguero", "1432" );
 		Direccion direccion3 = new Direccion("San Justo", "Varela", "1111" );
 
-		Propiedad casaAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar2 = new Casa( propi, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar3 = new Casa( propi, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
+		Propiedad primerCasaAAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad segundaCasaAAgregar = new Casa( propi, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
+		Propiedad tercerCasaAAgregar = new Casa( propi, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
 
 		
-		inmo.darDeAltaPropiedad(casaAgregar);
-		inmo.darDeAltaPropiedad(casaAgregar2);
-		inmo.darDeAltaPropiedad(casaAgregar3);
+		inmobiliaria.darDeAltaPropiedad(primerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(segundaCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(tercerCasaAAgregar);
 		
-		ArrayList<Propiedad> casasEncontradasEnElRango = inmo.buscarPropiedadesPorCiudad(ciudadABuscar, tipoDePropiedadABuscar);        
+		ArrayList<Propiedad> casasEncontradasEnElRango = inmobiliaria.buscarPropiedadesPorCiudad(ciudadABuscar, tipoDePropiedadABuscar);        
 		assertNotNull(casasEncontradasEnElRango);
-		assertFalse(casasEncontradasEnElRango.contains(casaAgregar3));
-		assertTrue(casasEncontradasEnElRango.contains(casaAgregar2));
-		assertTrue(casasEncontradasEnElRango.contains(casaAgregar));
-		assertEquals(casasEncontradasEnElRango.get(0), casaAgregar2);
+		assertFalse(casasEncontradasEnElRango.contains(tercerCasaAAgregar));
+		assertTrue(casasEncontradasEnElRango.contains(segundaCasaAAgregar));
+		assertTrue(casasEncontradasEnElRango.contains(primerCasaAAgregar));
+		assertEquals(casasEncontradasEnElRango.get(0), segundaCasaAAgregar);
     }
 	
 	@org.junit.Test
@@ -240,56 +239,56 @@ public class Test {
 		final Double VALOR_MINIMO_A_BUSCAR = 1000.00;
 		final Double VALOR_MAXIMO_A_BUSCAR = 70000.00;
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.DEPARTAMENTO;
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propietario = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Salguero", "1432" );
 		Direccion direccion3 = new Direccion("Bs As", "Varela", "1111" );
 		Direccion direccion4 = new Direccion("Mar del Plata", "Av. Peron", "1432" );
 
 
-		Propiedad casaAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar2 = new Casa( propi, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar3 = new Casa( propi, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
-		Propiedad depa1 = new Departamento(propi, direccion4, 15000.00,4, 2, "Dep1", TipoDeOperacion.VENTA);
-		Propiedad depa2 = new Departamento(propi, direccion4, 13000.00,5, 2, "Dep2", TipoDeOperacion.VENTA);
+		Propiedad primerCasaAAgregar = new Casa( propietario,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad segundaCasaAAgregar = new Casa( propietario, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
+		Propiedad tercerCasaAAgregar = new Casa( propietario, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
+		Propiedad primerDepartamentoAAgregar = new Departamento(propietario, direccion4, 15000.00,4, 2, "Dep1", TipoDeOperacion.VENTA);
+		Propiedad segundoDepartamentoAAgregar = new Departamento(propietario, direccion4, 13000.00,5, 2, "Dep2", TipoDeOperacion.VENTA);
 
 		
-		inmo.darDeAltaPropiedad(casaAgregar);
-		inmo.darDeAltaPropiedad(casaAgregar2);
-		inmo.darDeAltaPropiedad(casaAgregar3);
-		inmo.darDeAltaPropiedad(depa1);
-		inmo.darDeAltaPropiedad(depa2);
+		inmobiliaria.darDeAltaPropiedad(primerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(segundaCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(tercerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(primerDepartamentoAAgregar);
+		inmobiliaria.darDeAltaPropiedad(segundoDepartamentoAAgregar);
 
 		
-		TreeSet<Propiedad> departamentosEncontradosEnElRango = inmo.buscarPropiedadesPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR, tipoDePropiedadABuscar);
+		TreeSet<Propiedad> departamentosEncontradosEnElRango = inmobiliaria.buscarPropiedadesPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR, tipoDePropiedadABuscar);
         
-		assertEquals(depa1, departamentosEncontradosEnElRango.first());
+		assertEquals(primerDepartamentoAAgregar, departamentosEncontradosEnElRango.first());
     }
 	
 	@org.junit.Test
     public void queSePuedaRealizarLaBusquedaDeDepartamentosPorUbicacionYElResultadoEsteOrdenadoPorUbicacion() throws SinResultadosException, UmbralMinimoNoAlcanzadoException {
 		final String ciudadABuscar = "Bs As";
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.DEPARTAMENTO;
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
 		Propietario propi = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Salguero", "1432" );
 		Direccion direccion3 = new Direccion("Bs As", "Varela", "1111" );
 
-		Propiedad casaAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad depa1 = new Departamento(propi, direccion2, 15000.00,4, 2, "Dep1", TipoDeOperacion.VENTA);
-		Propiedad depa2 = new Departamento(propi, direccion3, 13000.00,5, 2, "Dep2", TipoDeOperacion.VENTA);
+		Propiedad primerCasaAAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad primerDepartamentoAAgregar = new Departamento(propi, direccion2, 15000.00,4, 2, "Dep1", TipoDeOperacion.VENTA);
+		Propiedad segundoDepartamentoAAgregar = new Departamento(propi, direccion3, 13000.00,5, 2, "Dep2", TipoDeOperacion.VENTA);
 		
-		inmo.darDeAltaPropiedad(casaAgregar);
-		inmo.darDeAltaPropiedad(depa1);
-		inmo.darDeAltaPropiedad(depa2);
+		inmobiliaria.darDeAltaPropiedad(primerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(primerDepartamentoAAgregar);
+		inmobiliaria.darDeAltaPropiedad(segundoDepartamentoAAgregar);
 		
-		ArrayList<Propiedad> casasEncontradasEnElRango = inmo.buscarPropiedadesPorCiudad(ciudadABuscar, tipoDePropiedadABuscar);        
+		ArrayList<Propiedad> casasEncontradasEnElRango = inmobiliaria.buscarPropiedadesPorCiudad(ciudadABuscar, tipoDePropiedadABuscar);        
 		assertNotNull(casasEncontradasEnElRango);
-		assertFalse(casasEncontradasEnElRango.contains(casaAgregar));
-		assertTrue(casasEncontradasEnElRango.contains(depa1));
-		assertTrue(casasEncontradasEnElRango.contains(depa2));
+		assertFalse(casasEncontradasEnElRango.contains(primerCasaAAgregar));
+		assertTrue(casasEncontradasEnElRango.contains(primerDepartamentoAAgregar));
+		assertTrue(casasEncontradasEnElRango.contains(segundoDepartamentoAAgregar));
     }
 	
 	@org.junit.Test(expected = SinResultadosException.class)
@@ -297,25 +296,25 @@ public class Test {
 		final Double VALOR_MINIMO_A_BUSCAR = 1000.00;
 		final Double VALOR_MAXIMO_A_BUSCAR = 1500.00;
 		final TipoDePropiedad tipoDePropiedadABuscar = TipoDePropiedad.CASA;
-		Inmobiliaria inmo = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario propi = new Propietario("Tonello", "40143300");
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Propietario propietario = new Propietario("Tonello", "40143300");
 		Direccion direccion1 = new Direccion("Bs As", "Salguero", "1232" );
 		Direccion direccion2 = new Direccion("Bs As", "Salguero", "1432" );
 		Direccion direccion3 = new Direccion("Bs As", "Varela", "1111" );
 		Direccion direccion4 = new Direccion("Mar del Plata", "Av. Peron", "1432" );
 
 
-		Propiedad casaAgregar = new Casa( propi,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar2 = new Casa( propi, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
-		Propiedad casaAgregar3 = new Casa( propi, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
-		Propiedad depa1 = new Departamento(propi, direccion4, 11000.00,1, 2, "Dep1", TipoDeOperacion.VENTA);
+		Propiedad primerCasaAAgregar = new Casa( propietario,direccion1, 12000.00, 1, TipoDeOperacion.VENTA );
+		Propiedad segundaCasaAAgregar = new Casa( propietario, direccion2, 15000.00, 2, TipoDeOperacion.VENTA );
+		Propiedad tercerCasaAAgregar = new Casa( propietario, direccion3, 14000.00, 3, TipoDeOperacion.VENTA );
+		Propiedad primerDepartamento = new Departamento(propietario, direccion4, 11000.00,1, 2, "Dep1", TipoDeOperacion.VENTA);
 		
-		inmo.darDeAltaPropiedad(casaAgregar);
-		inmo.darDeAltaPropiedad(casaAgregar2);
-		inmo.darDeAltaPropiedad(casaAgregar3);
-		inmo.darDeAltaPropiedad(depa1);
+		inmobiliaria.darDeAltaPropiedad(primerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(segundaCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(tercerCasaAAgregar);
+		inmobiliaria.darDeAltaPropiedad(primerDepartamento);
 		
-		TreeSet<Propiedad> casasEncontradasEnElRango = inmo.buscarPropiedadesPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR, tipoDePropiedadABuscar);
+		TreeSet<Propiedad> casasEncontradasEnElRango = inmobiliaria.buscarPropiedadesPorRangoDePrecio(VALOR_MINIMO_A_BUSCAR, VALOR_MAXIMO_A_BUSCAR, tipoDePropiedadABuscar);
         assertNull(casasEncontradasEnElRango);
     }
 	

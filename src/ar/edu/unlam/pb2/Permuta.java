@@ -11,11 +11,11 @@ public class Permuta implements Operacion {
 
 	@Override
 	public void realizar() {
-		Propietario propietarioDeLaCasaX = propiedadX.getDueño();
-		Propietario propietarioDeLaCasaY = propiedadY.getDueño();
+		Propietario propietarioDeLaCasaX = propiedadX.getPropietario();
+		Propietario propietarioDeLaCasaY = propiedadY.getPropietario();
 		
-		propiedadX.setDueño(propietarioDeLaCasaY);
-		propiedadY.setDueño(propietarioDeLaCasaX);
+		propiedadX.setPropietario(propietarioDeLaCasaY);
+		propiedadY.setPropietario(propietarioDeLaCasaX);
 	}
 
     

@@ -10,7 +10,7 @@ public class Venta implements Operacion {
     }
 
     public void realizar() {
-        propiedad.setDueño(nuevoPropietario);
+        propiedad.setPropietario(nuevoPropietario);
     }
 
     public Propiedad getPropiedad() {
