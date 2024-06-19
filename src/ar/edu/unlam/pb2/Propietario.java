@@ -18,7 +18,4 @@ public class Propietario extends Cliente {
 		this.propiedades = propiedades;
 	}
 
-	
-	
-	
 }

@@ -39,29 +39,68 @@ public class Inmobiliaria {
 		this.direccion = direccion;
 	}
 
-	public Boolean darDeAltaPropiedad(Propiedad nuevaPropiedad) {
+	public Boolean darDeAltaPropiedad(Propiedad nuevaPropiedad) throws UmbralMinimoNoAlcanzadoException {
+		if(validarUmbralMinimoDeLaPropiedad(nuevaPropiedad)) {
+			throw new UmbralMinimoNoAlcanzadoException("La propiedad no supera el umbral minimo!");
+		}
 		return propiedades.add(nuevaPropiedad);
+	}
+	
+	private Boolean validarUmbralMinimoDeLaPropiedad(Propiedad propiedadAValidar) {
+		if(propiedadAValidar.getTipoDeOperacion() == TipoDeOperacion.VENTA && propiedadAValidar.getValor() < 10000.00) {
+			return true;
+		}
+		return false;
 	}
 
 	public Boolean addCliente(Cliente cliente) {
 		return clientes.add(cliente);
 	}
 
-	public Cliente buscarClientePorDNI(String dni) {
+	private Cliente buscarClientePorDNI(String dni) throws ClienteNoEncontradoException {
 		for (Cliente cliente : clientes) {
-			if (cliente != null && cliente.getDni().equals(dni)) {
+			if (cliente.getDni().equals(dni)) {
 				return cliente;
 			}
 		}
-		return null;
+		throw new ClienteNoEncontradoException("No se encontró un Cliente con ese DNI");
 	}
 	
-    public void realizarOperacion(Operacion operacion) {
+    private Boolean realizarOperacion(Operacion operacion) throws PropiedadNoDisponibleException {
         operacion.realizar();
-        operaciones.add(operacion);
+        return operaciones.add(operacion);
+    }
+    
+    public Boolean realizarOperacion(String dniDelCliente, Integer codigoDePropiedad, TipoDeOperacion tipo) throws ClienteNoEncontradoException, PropiedadNoEncontradaException, PropiedadNoDisponibleException {
+    	Cliente cliente = buscarClientePorDNI(dniDelCliente);
+    	Propiedad propiedadInvolucradaEnLaOperacion = buscarPropiedadPorCodigo(codigoDePropiedad);
+    	Operacion nuevaOperacion;
+    	if(comprobarEstadoDePropiedad(propiedadInvolucradaEnLaOperacion, tipo)) {
+    		if(tipo == TipoDeOperacion.VENTA) {
+        		nuevaOperacion = new Venta(propiedadInvolucradaEnLaOperacion, (Propietario) cliente);
+    		} else {
+    			nuevaOperacion = new Alquiler(propiedadInvolucradaEnLaOperacion, (Inquilino)cliente, 2);
+    		}
+    		return realizarOperacion(nuevaOperacion);
+    	}
+    	return false;
+    }
+   
+    
+    public Boolean comprobarEstadoDePropiedad(Propiedad propiedadAVerificar, TipoDeOperacion tipoDeOperacionARealizar) {
+    	return propiedadAVerificar.getTipoDeOperacion().equals(tipoDeOperacionARealizar);
     }
 	
-    public TreeSet<Propiedad> buscarPropiedadesPorRangoDePrecio(double precioMinimo, double precioMaximo, TipoDePropiedad tipo) throws SinResultadosException {
+    private Propiedad buscarPropiedadPorCodigo(Integer codigoDePropiedad) throws PropiedadNoEncontradaException {
+    	for (Propiedad propiedad : propiedades) {
+			if (propiedad.getCodigoDePropiedad().equals(codigoDePropiedad)) {
+				return propiedad;
+			}
+		}
+		throw new PropiedadNoEncontradaException("No se encontró una propiedad con ese código!");
+	}
+
+	public TreeSet<Propiedad> buscarPropiedadesPorRangoDePrecio(Double precioMinimo, Double precioMaximo, TipoDePropiedad tipo) throws SinResultadosException {
         TreeSet<Propiedad> casasEnRango = new TreeSet<>();
 
         for (Propiedad propiedad : propiedades) {
@@ -107,29 +146,24 @@ public class Inmobiliaria {
 		return cantidadDePropiedades > 0 ? valorTotal / cantidadDePropiedades : 0.0;
 	}
 
-	public Propiedad buscarPropiedadPorCodigo(Integer codigo) {
-		for (Propiedad propiedad : propiedades) {
-			if (propiedad != null && propiedad.getCodigoDePropiedad().equals(codigo)) {
-				return propiedad;
-			}
-		}
-		return null;
+	public HashSet<Cliente> getClientes() {
+		return clientes;
 	}
 
-	public void alquilarPropiedad(Cliente inquilino, Propiedad propiedadAAlquilar) {
-		propiedadAAlquilar.setEstaAlquilada(true);
-		propiedadAAlquilar.setInquilino((Inquilino) inquilino);
+	public void setClientes(HashSet<Cliente> clientes) {
+		this.clientes = clientes;
 	}
 
 	public ArrayList<Propiedad> buscarPropiedadesPorCiudad(String ciudad, TipoDePropiedad tipo) throws SinResultadosException {
 		ArrayList<Propiedad> listaDePropiedadesPorUbicacion = new ArrayList<>();
+		
 		for (Propiedad propiedad : propiedades) {
 			if(tipo == TipoDePropiedad.CASA) {
-				if(propiedad instanceof Casa && propiedad.getDireccion().getCiudad().equals(ciudad)) {
+				if(propiedad instanceof Casa && propiedad.getDireccion().getCiudad().toLowerCase().equals(ciudad.toLowerCase())) {
 					listaDePropiedadesPorUbicacion.add((Casa) propiedad);
 				}
 			} else {
-				if(propiedad instanceof Departamento && propiedad.getDireccion().getCiudad().equals(ciudad)) {
+				if(propiedad instanceof Departamento && propiedad.getDireccion().getCiudad().toLowerCase().equals(ciudad.toLowerCase())) {
 					listaDePropiedadesPorUbicacion.add((Departamento) propiedad);
 				}
 			}
@@ -142,7 +176,20 @@ public class Inmobiliaria {
 	}
 	
 	private ArrayList<Propiedad> obtenerListadoDePropiedadesOrdenadasPorUbicacion(ArrayList <Propiedad> propiedades) {
-		Collections.sort(propiedades, new OrdenadorDePropiedadesPorUbicacion());
+		propiedades.sort(new OrdenadorDePropiedadesPorUbicacion());
 		return propiedades;
+	}
+
+	public Boolean realizarPermuta(Integer codigoDePropiedadX, Integer codigoDePropiedadY) throws PropiedadNoEncontradaException, PropiedadNoDisponibleException {
+		Propiedad propiedadX = buscarPropiedadPorCodigo(codigoDePropiedadX);
+		Propiedad propiedadY = buscarPropiedadPorCodigo(codigoDePropiedadY);
+		Operacion nuevaPermuta;
+		
+		if(comprobarEstadoDePropiedad(propiedadX, TipoDeOperacion.PERMUTA) && comprobarEstadoDePropiedad(propiedadY, TipoDeOperacion.PERMUTA)) {
+			nuevaPermuta = new Permuta(propiedadX, propiedadY);
+			return realizarOperacion(nuevaPermuta);
+		}
+		
+		return false;
 	}
 }

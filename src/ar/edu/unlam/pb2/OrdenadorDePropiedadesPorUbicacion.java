@@ -6,6 +6,6 @@ public class OrdenadorDePropiedadesPorUbicacion implements Comparator<Propiedad>
 
 	   @Override
 		public int compare(Propiedad p1, Propiedad p2) {
-			return p1.getDireccion().getCiudad().compareTo(p2.getDireccion().getCiudad());
+			return p1.getDireccion().getCalle().compareTo(p2.getDireccion().getCalle());
 		}
 }

@@ -11,13 +11,13 @@ abstract public class Propiedad implements Comparable<Propiedad> {
 	private Boolean estaAlquilada;
 	private TipoDeOperacion tipoDeOperacion;
 	
-	public Propiedad(Propietario dueño, Direccion direccion, Double valor, Integer codigoDePropiedad) {
+	public Propiedad(Propietario dueño, Direccion direccion, Double valor, Integer codigoDePropiedad, TipoDeOperacion tipo) {
 		this.dueño = dueño;
 		this.setDireccion(direccion);
 		this.setValor(valor);
 		this.setCodigoDePropiedad(codigoDePropiedad);
 		this.setEstaAlquilada(false);
-		this.tipoDeOperacion = TipoDeOperacion.VENTA;
+		this.tipoDeOperacion = tipo;
 	}
 	
 	@Override
@@ -108,18 +108,6 @@ abstract public class Propiedad implements Comparable<Propiedad> {
 	
 	@Override
 	public int compareTo(Propiedad o) {
-		int retorno = 0;
-		if(this.getValor() > o.getValor()) {
-			retorno = -1;
-		} else if(this.getValor() < o.getValor()) {
-			retorno = 1;
-		}
-		
-		return retorno;
-	}
-	
-	
-	
-	
-	
+		return o.getValor().compareTo(this.getValor());
+	}	
 }

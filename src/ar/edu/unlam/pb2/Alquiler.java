@@ -22,10 +22,16 @@ public class Alquiler implements Operacion {
     public Integer getDuracion() {
         return duracion;
     }
+    
+    public Boolean verificarDisponibilidadDeLaPropiedad()  {
+    	return propiedad.getEstaAlquilada();
+    }
 
 	@Override
-	public void realizar() {
-		// TODO Auto-generated method stub
-		
+	public void realizar() throws PropiedadNoDisponibleException {
+		if(verificarDisponibilidadDeLaPropiedad()) {
+			throw new PropiedadNoDisponibleException("La propiedad ya esta alquilada!");
+		}
+		propiedad.setInquilino(inquilino);
 	}
 }
