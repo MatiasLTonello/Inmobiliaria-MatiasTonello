@@ -319,15 +319,62 @@ public class Test {
     }
 	
 	@org.junit.Test(expected = UmbralMinimoNoAlcanzadoException.class)
-	public void queAlIntentarGuardarUnaPropiedadParaLaVentaCuyoImporteEstaPorDebajoDelUmbral10000SeArrojeLaExcepcionUmbralMinimoNoAlcanzadoExceptio () throws UmbralMinimoNoAlcanzadoException {
+	public void queAlIntentarGuardarUnaPropiedadParaLaVentaCuyoImporteEstaPorDebajoDelUmbral10000SeArrojeLaExcepcionUmbralMinimoNoAlcanzadoExceptio()
+			throws UmbralMinimoNoAlcanzadoException {
 		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
-		Propietario nuevaPropiedad = new Propietario("Tonello", "40143300");
-		Direccion direccion = new Direccion("Bs As", "Salguero", "1232" );
-		Propiedad nuevaCasa = new Casa(nuevaPropiedad, direccion, 2000.00, 1, TipoDeOperacion.VENTA );
-		
+		Propietario nuevoPropietario = new Propietario("Tonello", "40143300");
+		Direccion direccion = new Direccion("Bs As", "Salguero", "1232");
+		Propiedad nuevaCasa = new Casa(nuevoPropietario, direccion, 2000.00, 1, TipoDeOperacion.VENTA);
+
 		assertTrue(inmobiliaria.darDeAltaPropiedad(nuevaCasa));
 	}
 	
+/* ------------------------- Test adicionales para corroborar el correcto funcionamiento -------------- */
 	
+	
+	@org.junit.Test(expected = ClienteNoEncontradoException.class)
+	public void queAlNoEncontrarUnClienteEnLaInmobiliariaConUnNumeroDeDocumentoLanzeUnaExcepction () throws ClienteNoEncontradoException {
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Cliente nuevoCliente = new Propietario("Tonello", "40143300");
+		
+		inmobiliaria.addCliente(nuevoCliente);
+		
+		inmobiliaria.buscarClientePorDNI("32143");
+		
+	}
+	
+	@org.junit.Test(expected = PropiedadNoDisponibleException.class)
+	public void queNoSePuedaRealizarUnaVentaSiLaPropiedadNoFueAgregadaALaInmobiliariaParaSerVendida () throws  PropiedadNoDisponibleException, ClienteNoEncontradoException, PropiedadNoEncontradaException, UmbralMinimoNoAlcanzadoException {
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Cliente propietario = new Propietario("Tonello", "40143300");
+		Cliente posibleComprador = new Cliente("Juan Monteagudo", "3800000");
+
+		Direccion direccion = new Direccion("Bs As", "Salguero", "1232");
+		TipoDeOperacion tipoDeOperacionARealizar = TipoDeOperacion.VENTA;
+		
+		Propiedad nuevaCasaPuestaParaAlquiler = new Casa((Propietario)propietario, direccion, 10000.00, 1, TipoDeOperacion.ALQUILER );
+		inmobiliaria.addCliente(posibleComprador);
+		inmobiliaria.darDeAltaPropiedad(nuevaCasaPuestaParaAlquiler);
+		
+		inmobiliaria.realizarOperacion(posibleComprador.getDni(), nuevaCasaPuestaParaAlquiler.getCodigoDePropiedad(), tipoDeOperacionARealizar);
+		
+	}
+	
+	@org.junit.Test(expected = PropiedadNoDisponibleException.class)
+	public void queNoSePuedaRealizarUnAlquilerSiLaPropiedadNoFueAgregadaALaInmobiliariaParaSerAlquilada () throws  PropiedadNoDisponibleException, ClienteNoEncontradoException, PropiedadNoEncontradaException, UmbralMinimoNoAlcanzadoException {
+		Inmobiliaria inmobiliaria = new Inmobiliaria("Test", "Testing Direccion");
+		Cliente propietario = new Propietario("Tonello", "40143300");
+		Cliente posibleInquilino = new Inquilino("Juan Monteagudo", "3800000");
+
+		Direccion direccion = new Direccion("Bs As", "Salguero", "1232");
+		TipoDeOperacion tipoDeOperacionAlquiler = TipoDeOperacion.ALQUILER;
+	
+		Propiedad nuevaCasaPuestaParaVender = new Casa((Propietario)propietario, direccion, 10000.00, 1, TipoDeOperacion.VENTA );
+		inmobiliaria.addCliente(posibleInquilino);
+		inmobiliaria.darDeAltaPropiedad(nuevaCasaPuestaParaVender);
+		
+		inmobiliaria.realizarOperacion(posibleInquilino.getDni(), nuevaCasaPuestaParaVender.getCodigoDePropiedad(), tipoDeOperacionAlquiler);
+		
+	}
 		
 }
